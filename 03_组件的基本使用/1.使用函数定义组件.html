@@ -21,8 +21,6 @@
 			console.log(this); //此处的this是undefined，因为经过babel编译之后开启了严格模式。
 			return <h1>我是用函数定义的组件（我是简单组件）</h1>
 		}
-
-
 		//2.渲染组件到页面
 		ReactDOM.render(<Demo/>,document.getElementById('example'))
 		/* 
