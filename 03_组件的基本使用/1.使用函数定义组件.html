@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>函数式定义组件</title>
+</head>
+<body>
+
+  <div id="example"></div>
+
+	<!--react的核心库-->
+	<script type="text/javascript" src="../js/react.development.js"></script>
+	<!--react的扩展库，专门用于操作DOM-->
+	<script type="text/javascript" src="../js/react-dom.development.js"></script>
+	<!--引入babel，用于解析jsx语法为原生js语法-->
+	<script type="text/javascript" src="../js/babel.min.js"></script>
+
+	<script type="text/babel" >
+		//1.定义组件（函数式定义）---简单的组件用函数式定义
+		function Demo() {
+			console.log(this); //此处的this是undefined，因为经过babel编译之后开启了严格模式。
+			return <h1>我是用函数定义的组件（我是简单组件）</h1>
+		}
+
+
+		//2.渲染组件到页面
+		ReactDOM.render(<Demo/>,document.getElementById('example'))
+		/* 
+			当你写了ReactDOM.render(<Demo/>,do.....后发生了什么？
+					1.react发现<Demo/>
+						1.1首字母是大写，寻找Demo组件定义的位置。
+						1.2首字母是小写：
+							1.2.1 而且和html元素能够对应的上，直接转为同名的html元素。
+							1.2.2 但是不和html元素能够对应的上，正常渲染标签，但是控制台会报错。
+					2.react帮我们调用Demo函数，并获取到Demo函数的返回值。
+					3.把返回的虚拟DOM，转换成真实DOM，放入指定容器。
+		 */
+
+
+	</script>
+
+</body>
+</html>
