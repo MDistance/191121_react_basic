@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>虚拟DOM的两种创建方式</title>
+</head>
+<body>
+  <div id="test"></div>
+	<!--react的核心库-->
+	<script type="text/javascript" src="../js/react.development.js"></script>
+	<!--react的扩展库，专门支持react操作DOM-->
+	<script type="text/javascript" src="../js/react-dom.development.js"></script>
+
+	<!-- 使用原生js创建虚拟DOM -->
+	<script type="text/javascript">
+	const myId = 'AtGuigU'
+	const myContent = 'HeLlO,ReAct'
+
+	//1.创建虚拟DOM
+	//React.createElement(标签名,标签属性,内容)
+	const VDOM = React.createElement('h1',{id:myId.toLowerCase()},React.createElement('span',{},myContent.toLowerCase()))
+
+	//2.渲染虚拟DOM
+	ReactDOM.render(VDOM,document.getElementById('test'))
+	</script>
+  
+</body>
+</html>
