@@ -15,5 +15,30 @@
 	<!--引入babel，用于解析jsx语法为原生js语法-->
 	<script type="text/javascript" src="../js/babel.min.js"></script>
 
+	<script type="text/babel">
+	//1.定义组件(用ES6类定义)-------复杂组件
+	class Demo extends React.Component{
+		//该render和ReactDOM.render没有关系，仅仅是名字的重合。
+		render(){ //render是放在哪里的？--- Demo的原型对象上的，Demo的实例可以调用到
+			console.log(this);//Demo的实例
+			return <h1>我是ES6类定义的组件（复杂组件用我定义）</h1>
+		}
+	}
+	//2.渲染组件
+	ReactDOM.render(<Demo/>,document.getElementById('example'))
+	/* 
+			上述代码：当你写了ReactDOM.render(<Demo/>,do.....后发生了什么？
+					1.react发现<Demo/>
+						1.1首字母是大写，寻找Demo组件定义的位置。
+						1.2首字母是小写：
+							1.2.1 而且和html元素能够对应的上，直接转为同名的html元素。
+							1.2.2 但是不和html元素能够对应的上，正常渲染标签，但是控制台会报错。
+					2.react帮我们：new了一个Demo的实例。
+					3.通过上一步产生的实例，调用到了Demo原型上的render方法，获取到了返回值。
+					4.把返回的虚拟DOM，转换成真实DOM，放入指定容器。
+		 */
+	
+	</script>
+
 </body>
 </html>
