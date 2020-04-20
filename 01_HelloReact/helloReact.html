@@ -6,11 +6,42 @@
 	<title>01_HelloReact</title>
 </head>
 <body>
+	
+	<div id="demo"></div>
+	<!-- 准备好一个容器 -->
+	<div id="test"></div>
+
 	<!-- 1.引入react核心库 -->
 	<script type="text/javascript" src="../js/react.development.js"></script>
 	<!-- 2.引入react-dom,react借助该库去操作DOM -->
 	<script type="text/javascript" src="../js/react-dom.development.js"></script>
 	<!-- 3.引入babel，专门用于将react的jsx转为js -->
+	<script type="text/javascript" src="../js/babel.min.js"></script>
+	
+	<!-- 下面这行代码要把：text/javascript 改写为：text/babel -->
+	<script type="text/babel">
+		//1.创建虚拟DOM
+		const VDOM = <h1>hello,react</h1> //注意：此处的VDOM不是字符串，不要加引号！！！
+		//const trueDOM = document.getElementById('demo')
+		//console.log(typeof VDOM);
+
+		//2.通过react渲染虚拟DOM（虚拟DOM被翻译成了真实DOM，随后放入页面容器）
+		ReactDOM.render(VDOM,document.getElementById('test'))
+		
+		//console.log(VDOM);
+		//console.log(trueDOM);
+		//debugger
+
+		/* 
+				关于虚拟DOM，你要知道的两点：
+						1.虚拟DOM到底是什么？（到底是js中的哪一种数据类型？）
+								就是js中的一个普通对象，即：Object类型的对象。
+						2.虚拟DOM和真实DOM到底有什么区别呢？
+								(1).虚拟DOM比较“轻”，真实DOM比较“重”
+								(2).虚拟DOM是react在用的，无需真实DOM身上那么多的属性。
+		*/
+
+	</script>
 
 </body>
 </html>
