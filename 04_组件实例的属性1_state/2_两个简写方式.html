@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>两个简写方式</title>
+</head>
+<body>
+
+<div id="example"></div>
+
+<!--react的核心库-->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!--react的扩展库，专门用于操作DOM-->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<!--引入babel，用于解析jsx语法为原生js语法-->
+<script type="text/javascript" src="../js/babel.min.js"></script>
+
+<script type="text/babel">
+
+//1.定义组件
+class Weather extends React.Component{
+	//state可以直接写赋值语句
+	state = {
+		isHot:true,
+		temperature:'11~13℃'
+	}
+
+	//自己定义的非生命周期函数要写赋值语句，且函数要写箭头函数。
+	changeWeather = ()=> {
+		let {isHot} = this.state
+		this.setState({isHot:!isHot}) //此处的动作不是替换，而是合并修改
+		console.log(this)
+	}
+
+	//由于render属于生命周期函数，本身this就是没问题的，所以不用写成赋值语句的形式。
+	render(){
+		return (
+			<h2 onClick={this.changeWeather}>
+				今天天气很{this.state.isHot ? '炎热' : '凉爽'},温度为：{this.state.temperature}
+			</h2>
+		)
+	}
+}
+
+//2.渲染组件
+ReactDOM.render(<Weather/>,document.getElementById('example'))
+
+</script>
+
+</body>
+</html>
+

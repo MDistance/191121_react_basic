@@ -7,6 +7,8 @@
 <body>
 
 <div id="example"></div>
+<div id="example1"></div>
+<div id="example2"></div>
 
 <!--react的核心库-->
 <script type="text/javascript" src="../js/react.development.js"></script>
@@ -24,6 +26,36 @@
       2). 年龄必须为数字类型，且是必要信息
 			3). 性别必须为字符串类型，若没有指定性别，默认值为“男”
   */
+	//1.定义组件
+	class Person extends React.Component{
+		render(){
+			console.log(this);
+			const {name,age,sex} = this.props
+			return (
+				<div>
+					<ul>
+						<li>姓名：{name}</li>
+						<li>年龄：{age+1}</li>
+						<li>性别：{sex}</li>
+					</ul>
+					<hr/>
+				</div>
+			)
+		}
+	}
+
+	const p1 = {
+		name:'小猪佩奇',
+		age:5,
+		sex:'女'
+	}
+
+	//2.渲染组件
+	ReactDOM.render(<Person name="TOM" age={18} sex="女"/>,document.getElementById('example'))
+	ReactDOM.render(<Person {...p1}/>,document.getElementById('example1'))//此种写法等价于下面的写法
+	//ReactDOM.render(<Person name={p1.name} age={p1.age} sex={p1.sex}/>,document.getElementById('example'))
+
+
 </script>
 
 

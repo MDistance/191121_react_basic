@@ -45,7 +45,7 @@ class Weather extends React.Component{
 		 */
 		this.setState({isHot:!isHot}) //此处的动作不是替换，而是合并修改
 		//在该处更改Weather实例对象中state中的isHot为相反值
-		console.log(this);
+		console.log(this)
 	}
 
 	/* 
@@ -56,9 +56,11 @@ class Weather extends React.Component{
 	 */
 	render(){
 		//console.log('render',this);
-		return <h2 onClick={this.changeWeather}>
-						今天天气很{this.state.isHot ? '炎热' : '凉爽'},温度为：{this.state.temperature}
-					 </h2>
+		return (
+			<h2 onClick={this.changeWeather}>
+				今天天气很{this.state.isHot ? '炎热' : '凉爽'},温度为：{this.state.temperature}
+			</h2>
+		)
 	}
 }
 
