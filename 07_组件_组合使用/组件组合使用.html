@@ -14,6 +14,51 @@
 	<script type="text/javascript" src="../js/react-dom.development.js"></script>
 	<!--引入babel，用于解析jsx语法为原生js语法-->
 	<script type="text/javascript" src="../js/babel.min.js"></script>
+
+	<script type="text/babel">
+
+		//定义App组件，他是所有组件的“外壳”
+		class App extends React.Component{
+			render(){
+				return (
+					<div>
+						<h1>Simple Todo List</h1>
+						<Add/>
+						<List/>
+					</div>
+				)
+			}
+		}
+
+		//定义Add组件---用于添加的
+		class Add extends React.Component{
+			render(){
+				return (
+					<div>
+						<input type="text"/>
+						<button>Add#xxxx</button>
+					</div>
+				)
+			}
+		}
+
+		//定义Add组件---用于添加的
+		class List extends React.Component{
+			render(){
+				return (
+					<ul>
+						<li>吃饭</li>
+						<li>睡觉</li>
+						<li>打海峰</li>
+					</ul>
+				)
+			}
+		}
+
+		//渲染组件
+		ReactDOM.render(<App/>,document.getElementById('example'))
+
+	</script>
   
 </body>
 </html>

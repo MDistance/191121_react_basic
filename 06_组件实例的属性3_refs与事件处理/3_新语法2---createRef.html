@@ -21,6 +21,33 @@
       1. 点击按钮, 提示第一个输入框中的值
       2. 当第2个输入框失去焦点时, 提示这个输入框中的值
    */
+	//1.定义组件
+	class Demo extends React.Component{
+		//React.createRef()会创造一个容器，这个容器专门用于保存节点，且这容器只能保存一个节点。
+		myRef = React.createRef()
+		
+		test1 = ()=> {
+			console.log(this.myRef.current);
+		}
+
+		test2 = (event)=>{
+			alert(event.target.value);
+		}
+
+		render(){
+			return (
+				<div>
+					<input type="text" ref={this.myRef}/>&nbsp;
+					<button onClick={this.test1}>点我提示左侧数据</button>&nbsp;
+					<input onBlur={this.test2} type="text" placeholder="失去焦点提示数据"/>
+				</div>
+			)
+		}
+	}
+
+	//2.渲染组件
+	ReactDOM.render(<Demo/>,document.getElementById('example'))
+		
   </script>
 </body>
 </html>
