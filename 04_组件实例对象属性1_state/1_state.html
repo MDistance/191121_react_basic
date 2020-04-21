@@ -19,24 +19,54 @@
 
 //1.定义组件
 class Weather extends React.Component{
-	
 	constructor(...params){
 		//构造器中的this是类的实例对象
 		super(...params)
-		this.state = {isHot:false}
+		this.state = {
+			isHot:true, //天气炎热还是凉爽的标识
+			temperature:'11~13℃'
+		}
+		this.changeWeather = this.changeWeather.bind(this)
 	}
 
+	/* 
+		1.demo是放在原型上的。
+		2.demo中的this是undefined
+		3.由于demo不属于react生命周期函数。
+		备注：在组件类中，所有非react生命周期函数中的this都被react更改了this，变为了undefined。
+	 */
+	changeWeather() {
+		//获取原状态
+		let {isHot} = this.state
+		/* 
+			关于修改state要注意：
+				1.状态不可以直接修改，这就是直接修改 this.state.isHot = xxxx
+				2.要调用一个内置的setState()方法去更新状态
+		 */
+		this.setState({isHot:!isHot}) //此处的动作不是替换，而是合并修改
+		//在该处更改Weather实例对象中state中的isHot为相反值
+		console.log(this);
+	}
+
+	/* 
+		1.render是放在原型上的。
+		2.render中的this是类的实例对象。
+		3.由于render是react众多生命周期函数中的一个。
+		备注：react所有生命周期函数中的this都是组件的实例对象。
+	 */
 	render(){
-		//render中的this是类的实例对象
-		return <h2>今天天气很{this.state.isHot ? '炎热' : '凉爽'}</h2>
+		//console.log('render',this);
+		return <h2 onClick={this.changeWeather}>
+						今天天气很{this.state.isHot ? '炎热' : '凉爽'},温度为：{this.state.temperature}
+					 </h2>
 	}
 }
+
 
 //2.渲染组件
 ReactDOM.render(<Weather/>,document.getElementById('example'))
 
 </script>
-
 
 </body>
 </html>
