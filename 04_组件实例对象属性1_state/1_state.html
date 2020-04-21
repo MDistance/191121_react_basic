@@ -15,6 +15,28 @@
 <!--引入babel，用于解析jsx语法为原生js语法-->
 <script type="text/javascript" src="../js/babel.min.js"></script>
 
+<script type="text/babel">
+
+//1.定义组件
+class Weather extends React.Component{
+	
+	constructor(...params){
+		//构造器中的this是类的实例对象
+		super(...params)
+		this.state = {isHot:false}
+	}
+
+	render(){
+		//render中的this是类的实例对象
+		return <h2>今天天气很{this.state.isHot ? '炎热' : '凉爽'}</h2>
+	}
+}
+
+//2.渲染组件
+ReactDOM.render(<Weather/>,document.getElementById('example'))
+
+</script>
+
 
 </body>
 </html>

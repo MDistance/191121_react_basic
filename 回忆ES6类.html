@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>复习class</title>
+</head>
+<body>
+
+<script type="text/javascript" >
+
+	//定义一个Person类，类的本质是函数（构造函数）。
+	class Person {
+		/* 
+			类里面能写什么？
+					1.构造器(非必须)
+					2.方法(非必须)
+					3.赋值语句(非必须)，形如： a = 1 ，含义是：向实例对象身上追加一个属性，名为a，值为1
+		 */
+	  constructor(name,age){
+			//一般向实例身上追加属性
+			this.name = name
+			this.age = age
+		}
+
+		a = 1 //赋值语句
+
+		/* speak = function (params) { //speak是放在Person实例身上的。
+			console.log('我说话了');
+		} */
+		
+		speak(){ //speak是放在Person原型上的，供Person的实例用。
+			console.log(`我是${this.name},我的年龄是:${this.age}`);
+		}
+	}
+
+	class Student extends Person{
+		//如果A类继承了B类，那么在A类的构造器中就必须要调用super
+		constructor(name,age,grade){
+			super(name,age,grade)
+			this.grade = grade
+		}
+	}
+
+	let stu = new Student('海吉',18,'高三')
+	console.log(stu);
+
+
+
+</script>
+	
+</body>
+</html>
