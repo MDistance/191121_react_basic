@@ -28,6 +28,18 @@
   */
 	//1.定义组件
 	class Person extends React.Component{
+		//限制传递标签属性的必要性、类型
+		static propTypes = {
+			name:PropTypes.string.isRequired, //表示：name是必填项且为字符串类型
+			age:PropTypes.number.isRequired,
+			sex:PropTypes.string
+		}
+
+		//指定传递标签属性的默认值
+		static defaultProps = {
+			sex:'不男不女'
+		}
+		
 		render(){
 			console.log(this);
 			const {name,age,sex} = this.props
@@ -35,7 +47,7 @@
 				<div>
 					<ul>
 						<li>姓名：{name}</li>
-						<li>年龄：{age+1}</li>
+						<li>年龄：{age}</li>
 						<li>性别：{sex}</li>
 					</ul>
 					<hr/>
@@ -44,6 +56,7 @@
 		}
 	}
 
+	//模拟一个人的信息
 	const p1 = {
 		name:'小猪佩奇',
 		age:5,
@@ -51,10 +64,15 @@
 	}
 
 	//2.渲染组件
-	ReactDOM.render(<Person name="TOM" age={18} sex="女"/>,document.getElementById('example'))
+	ReactDOM.render(<Person name="TOM" age={18} />,document.getElementById('example'))
 	ReactDOM.render(<Person {...p1}/>,document.getElementById('example1'))//此种写法等价于下面的写法
 	//ReactDOM.render(<Person name={p1.name} age={p1.age} sex={p1.sex}/>,document.getElementById('example'))
 
+	/* 
+		注意：
+			1.react + babel 就可以让三点运算符展开一个对象，但是仅适用于标签属性。
+			2.注意区分原生js中的{...p1}
+	 */
 
 </script>
 
