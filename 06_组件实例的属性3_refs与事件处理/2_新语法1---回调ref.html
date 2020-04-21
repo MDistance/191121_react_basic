@@ -21,6 +21,30 @@
       1. 点击按钮, 提示第一个输入框中的值
       2. 当第2个输入框失去焦点时, 提示这个输入框中的值
    */
+	//1.定义组件
+	class Demo extends React.Component{
+
+		test1 = ()=> {
+			alert(this.left.value)
+		}
+
+		test2 = (event)=>{
+			alert(event.target.value);
+		}
+
+		render(){
+			return (
+				<div>
+					<input type="text" ref={currentNode => this.left = currentNode}/>&nbsp;
+					<button onClick={this.test1}>点我提示左侧数据</button>&nbsp;
+					<input onBlur={this.test2} type="text" placeholder="失去焦点提示数据"/>
+				</div>
+			)
+		}
+	}
+
+	//2.渲染组件
+	ReactDOM.render(<Demo/>,document.getElementById('example'))
 		
   </script>
 </body>
