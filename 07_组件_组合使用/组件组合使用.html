@@ -19,12 +19,26 @@
 
 		//定义App组件，他是所有组件的“外壳”
 		class App extends React.Component{
+
+			state = {
+				todos:['吃饭','睡觉','谈恋爱','玩游戏']
+			}
+			//在不借助任何组件通信技术时，状态在哪里，更新状态的方法就在哪里。
+
+			addTodos = (name)=>{
+				//获取原状态
+				const {todos} = this.state
+				//更新状态
+				this.setState({todos:[name,...todos]})
+			}
+
 			render(){
+				const {todos} = this.state
 				return (
 					<div>
 						<h1>Simple Todo List</h1>
-						<Add/>
-						<List/>
+						<Add count={todos.length} addTodos={this.addTodos}/>
+						<List todos={todos}/>
 					</div>
 				)
 			}
@@ -32,11 +46,27 @@
 
 		//定义Add组件---用于添加的
 		class Add extends React.Component{
+
+			//用于添加一个要做的事
+			add = ()=>{
+				//1.获取用户输入
+				let {value} = this.userInput
+				//2.校验数据(数据不能为空)
+				if(!value || !value.trim()){
+					alert('输入不能为空')
+					return
+				}
+				//3.更新状态，从而触发react更新界面
+				this.props.addTodos(value)
+				//4.清空用户的输入
+				this.userInput.value = ''
+			}
+
 			render(){
 				return (
 					<div>
-						<input type="text"/>
-						<button>Add#xxxx</button>
+						<input ref={currentNode => this.userInput = currentNode} type="text"/>
+						<button onClick={this.add}>Add#{this.props.count}</button>
 					</div>
 				)
 			}
@@ -47,9 +77,11 @@
 			render(){
 				return (
 					<ul>
-						<li>吃饭</li>
-						<li>睡觉</li>
-						<li>打海峰</li>
+						{
+							this.props.todos.map((name,index)=>{
+								return <li key={index}>{name}</li>
+							})
+						}
 					</ul>
 				)
 			}
