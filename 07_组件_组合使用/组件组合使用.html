@@ -23,6 +23,17 @@
 			state = {
 				todos:['吃饭','睡觉','谈恋爱','玩游戏']
 			}
+
+			//在更新之前获取快照（在render之后，componentDidUpdate之前输出：之前的props，之前state）
+			getSnapshotBeforeUpdate(){
+				console.log('---getSnapShotBeforeUpdate---');
+				return '当前页面滚动条的位置'
+			}
+
+			componentDidUpdate(preProps,preState,data){
+				console.log('---componentDidUpdate---',preProps,preState,data);
+			}
+
 			//在不借助任何组件通信技术时，状态在哪里，更新状态的方法就在哪里。
 			addTodos = (name)=>{
 				//获取原状态
@@ -30,6 +41,7 @@
 				//更新状态
 				this.setState({todos:[name,...todos]})
 			}
+
 			render(){
 				const {todos} = this.state
 				return (
@@ -45,9 +57,9 @@
 		//定义Add组件---用于添加的
 		class Add extends React.Component{
 
-			UNSAFE_componentWillReceiveProps(){
+			/* UNSAFE_componentWillReceiveProps(){
 				console.log('---componentWillReceiveProps---');
-			}
+			} */
 
 			//用于添加一个要做的事
 			add = ()=>{
@@ -65,6 +77,7 @@
 			}
 
 			render(){
+				console.log('---render---');
 				return (
 					<div>
 						<input ref={currentNode => this.userInput = currentNode} type="text"/>

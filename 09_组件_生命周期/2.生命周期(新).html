@@ -15,6 +15,24 @@
 <script type="text/javascript" src="../js/babel.min.js"></script>
 
 <script type="text/babel">
+
+/* 
+		生命周期流程(新):
+				a.	初始化阶段:  由ReactDOM.render()触发
+							* constructor()
+							* static getDerivedStateFromProps() 
+							* render()
+							* componentDidMount()
+				b.	更新阶段 由组件内部this.setSate()、父组件重新render触发、forceUpdate
+							* static getDerivedStateFromProps()
+							* shouldComponentUpdate() ----- 若是forceUpdate不走这个钩子
+							* render()
+							* getSnapshotBeforeUpdate()
+							* componentDidUpdate()
+				c.	移除组件:  由ReactDOM.unmountComponentAtNode(containerDom)触发
+							* componentWillUnmount()
+	*/
+
 	//定义组件
 	class Demo extends React.Component{
 
@@ -26,6 +44,10 @@
 
 		componentDidMount(){
 			console.log('---componentDidMount---');
+		}
+
+		change = ()=>{
+			this.setState({car:'玛莎拉蒂'})
 		}
 		
 		//从props中获取一个衍生的state
@@ -43,14 +65,14 @@
 			return (
 				<div>
 					<h2>我的座驾是：{this.state.car}</h2>
-					<button>换车</button>
+					<button onClick={this.change}>换车</button>
 				</div>
 			)
 		}
 	}
 
 	//渲染组件
-	ReactDOM.render(<Demo car="五菱宏光"/>,document.getElementById('example'))
+	ReactDOM.render(<Demo/>,document.getElementById('example'))
 
 </script>
 
