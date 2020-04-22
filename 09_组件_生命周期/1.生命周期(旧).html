@@ -58,14 +58,14 @@
 		//组件完成挂在时调用，调用一次
 		componentDidMount(){
 			console.log('---componentDidMount---');
-			/* this.timer = setInterval(() => {
+			this.timer = setInterval(() => {
 				let {opacity} = this.state
 				opacity -= 0.1
 				if(opacity <= 0){
 					opacity = 1
 				}
 				this.setState({opacity})
-			}, 200); */
+			}, 200);
 		}
 
 		//组件将要卸载时调用，调用一次
