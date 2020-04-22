@@ -47,6 +47,10 @@
 		//定义Add组件---用于添加的
 		class Add extends React.Component{
 
+			componentWillReceiveProps(){
+				console.log('---componentWillReceiveProps---');
+			}
+
 			//用于添加一个要做的事
 			add = ()=>{
 				//1.获取用户输入
