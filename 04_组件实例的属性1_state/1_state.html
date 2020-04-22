@@ -55,6 +55,7 @@ class Weather extends React.Component{
 		备注：react所有生命周期函数中的this都是组件的实例对象。
 	 */
 	render(){
+		console.log('---render被调用了---');
 		//console.log('render',this);
 		return (
 			<h2 onClick={this.changeWeather}>

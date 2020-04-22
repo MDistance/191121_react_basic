@@ -19,7 +19,7 @@
 		需求: 自定义组件
 			1. 让指定的文本做显示/隐藏的动画
 			2. 切换时间为2S
-			3. 点击按钮从界面中移除组件界面（当前组件在页面上消失）
+			3. 点击按钮从界面中移除组件（当前组件在页面上消失）
 		*/
 
 	/* 
@@ -40,6 +40,48 @@
 				1.componentDidMount() --- 一般做：1.开启定时器、2.发送ajax请求获取数据、3.订阅消息 等等初始化操作。
 				2.componentWillUnmount() --- 一般做：1.关闭定时器、2.关闭一些连接(数据库、与服务器的长连接) 等等收尾操作。
 	*/
+
+	//定义组件
+	class Life extends React.Component{
+
+		state = {opacity:1} 
+
+		//组件挂在完毕就会调用，调用一次
+		componentDidMount(){
+			this.timer = setInterval(() => {
+				let {opacity} = this.state
+				opacity -= 0.1
+				if(opacity <= 0){
+					opacity = 1
+				}
+				this.setState({opacity})
+			}, 200);
+		}
+
+		//组件将要卸载之前调用，调用一次
+		componentWillUnmount(){
+			clearInterval(this.timer)
+		}
+
+		death = ()=>{
+			//让Life组件从页面中卸载
+			ReactDOM.unmountComponentAtNode(document.getElementById('example'))
+		}
+		
+		//render何时调用：1.初始化的时候。2.当状态发生改变的时候。
+		//render调用几次：1+n 1是初始化时候，n是你更新状态的次数。
+		render(){
+			return (
+				<div>
+					<h2 style={{opacity:this.state.opacity}}>react学不会怎么办？</h2>
+					<button onClick={this.death}>不活了</button>
+				</div>
+			)
+		}
+	}
+
+	//渲染组件
+	ReactDOM.render(<Life/>,document.getElementById('example'))
 
 </script>
 </body>

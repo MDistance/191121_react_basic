@@ -13,9 +13,51 @@
 <script type="text/babel">
   /*
   需求: 一个包含表单的组件
-    1. 输入用户名密码后, 点击登陆提示输入信息
+    1. 输入用户名密码后, 点击登录提示输入信息
     2. 不提交表单
   */
+
+	//1.定义组件
+	class Login extends React.Component{
+		/* 
+			受控组件：
+				页面上所有输入类的DOM，随着用户的输入，自动将输入的值维护到状态中，就是受控组件。
+		 */
+
+		state = {
+			username:'',
+			password:''
+		}
+
+		//表单提交的回调
+		handleSubmit = (event)=>{
+			//禁止表单提交
+			event.preventDefault()
+			//提示用户所输入的用户名和密码
+			alert(`你输入的用户名为${this.state.username},密码是：${this.state.password}`)
+		}
+
+		handleChange = (event,key)=>{
+			console.log(event);
+			//1.获取用户的输入
+			const {value} = event.target
+			//2.讲输入内容维护到状态中
+			this.setState({[key]:value})
+		}
+
+		render(){
+			return (
+				<form onSubmit={this.handleSubmit}>
+					用户名：<input onChange={(event)=>{this.handleChange(event,'username')}}/>
+					密码：<input onChange={(event)=>{this.handleChange(event,'password')}} type="password"/>
+					<button>登录</button>
+				</form>
+			)
+		}
+	}
+
+	ReactDOM.render(<Login/>,document.getElementById('example'))
+
 </script>
 </body>
 </html>
