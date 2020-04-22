@@ -15,63 +15,42 @@
 <script type="text/javascript" src="../js/babel.min.js"></script>
 
 <script type="text/babel">
-/* 
-		生命周期流程(新):
-				a.	初始化阶段:  由ReactDOM.render()触发
-							* constructor()
-							* static getDerivedStateFromProps() 
-							* render()
-							* componentDidMount()
-				b.	更新阶段 由组件内部this.setSate()或父组件重新render触发
-							* static getDerivedStateFromProps()
-							* shouldComponentUpdate()
-							* render()
-							* getSnapshotBeforeUpdate()
-							* componentDidUpdate()
-				c.	移除组件:  由ReactDOM.unmountComponentAtNode(containerDom)触发
-							* componentWillUnmount()
-	*/
-	
-	class App extends React.Component{
+	//定义组件
+	class Demo extends React.Component{
 
 		constructor(...params){
 			console.log('---constructor---');
 			super(...params)
-			this.state = {car:'奔驰'}
+			this.state = {car:'奔驰c63'}
 		}
 
-		//从props获取衍生的状态
+		componentDidMount(){
+			console.log('---componentDidMount---');
+		}
+		
+		//从props中获取一个衍生的state
 		static getDerivedStateFromProps(props,state){
 			console.log('---getDerivedStateFromProps---',props,state);
-			return {car:props.car}
-			//return null //此处可以返回：1.状态对象。2.null
-		}
-
-		getSnapshotBeforeUpdate(props,preState){
-			console.log('---getSnapshotBeforeUpdate---',props,preState);
-			return '哈哈'
-		}
-
-		componentDidUpdate(props,preState,c){
-			console.log('---componentDidUpdate---',props,preState,c);
-		}
-
-		change = ()=>{
-			this.setState({car:'马自达·阿特兹'})
+			if(props.car){
+				return {car:props.car}
+			}else{
+				return null
+			}
 		}
 
 		render(){
 			console.log('---render---');
 			return (
 				<div>
-					<h2>我是App组件，我的车是{this.state.car}</h2>
-					<button onClick={this.change}>点我换车的名字</button>
+					<h2>我的座驾是：{this.state.car}</h2>
+					<button>换车</button>
 				</div>
 			)
 		}
 	}
 
-	ReactDOM.render(<App car="奥拓"/>,document.getElementById('example'))
+	//渲染组件
+	ReactDOM.render(<Demo car="五菱宏光"/>,document.getElementById('example'))
 
 </script>
 
